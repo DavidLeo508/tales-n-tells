@@ -49,9 +49,6 @@
             "body": "Join us as we redefine what flash-fiction can be. Every issue is an invitation to think differently, feel deeply, and question the ordinary.",
             "buttonLabel": "Explore the Anthology",
             "buttonUrl": "/tales"
-        },
-        {
-            "type": "wallpaperCta"
         }
     ]
 }
