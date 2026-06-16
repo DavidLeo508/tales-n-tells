@@ -47,15 +47,6 @@
                     "status": "available",
                     "description": "A standalone micro-narrative. Pure storytelling in its most concentrated form.",
                     "image": "/images/covers/mini-01.svg"
-                },
-                {
-                    "type": "edition",
-                    "vol": "VOL. 005",
-                    "title": "ARCHIVES: FIRST LIGHT",
-                    "tag": "BEST SELLER",
-                    "status": "available",
-                    "description": "A retrospective collection. The stories that started it all, remastered and reimagined.",
-                    "image": "/images/covers/archives.svg"
                 }
             ]
         },
