@@ -50,15 +50,6 @@
                 },
                 {
                     "type": "edition",
-                    "vol": "VOL. 004",
-                    "title": "ECHOES: LIMITED RUN",
-                    "tag": "LIMITED EDITION",
-                    "status": "limited",
-                    "description": "A collector's edition. Only 500 copies printed. Featuring exclusive cover art and bonus material.",
-                    "image": "/images/covers/echoes.svg"
-                },
-                {
-                    "type": "edition",
                     "vol": "VOL. 005",
                     "title": "ARCHIVES: FIRST LIGHT",
                     "tag": "BEST SELLER",
