@@ -27,7 +27,8 @@
                 },
                 {
                     "type": "role",
-                    "icon": "palette"
+                    "icon": "palette",
+                    "label": "Colorist"
                 },
                 {
                     "type": "role",
