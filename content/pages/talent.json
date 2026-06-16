@@ -28,7 +28,8 @@
                 {
                     "type": "role",
                     "icon": "palette",
-                    "label": "Colorist"
+                    "label": "Colorist",
+                    "description": "Paint our stories and give emotions to the pages"
                 },
                 {
                     "type": "role",
