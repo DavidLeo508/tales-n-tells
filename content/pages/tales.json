@@ -38,15 +38,6 @@
                     "status": "coming-soon",
                     "description": "Dark. Gritty. Uncompromising. A collection of micro-narratives set in shadowed cities and morally ambiguous spaces.",
                     "image": "/images/covers/noir.svg"
-                },
-                {
-                    "type": "edition",
-                    "vol": "MINI 001",
-                    "title": "FLASH: MIDNIGHT",
-                    "tag": "MINI",
-                    "status": "available",
-                    "description": "A standalone micro-narrative. Pure storytelling in its most concentrated form.",
-                    "image": "/images/covers/mini-01.svg"
                 }
             ]
         },
