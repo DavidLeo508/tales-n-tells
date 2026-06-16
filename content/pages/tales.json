@@ -1,0 +1,80 @@
+{
+  "type": "page",
+  "slug": "tales",
+  "title": "The Tale Vault — Tales 'N' Tells",
+  "sections": [
+    {
+      "type": "pageHeader",
+      "eyebrow": "Tales Told",
+      "title": "The Tale Vault",
+      "subtitle": "Every volume is a standalone experience. Curated collections of flash-fiction comics designed to challenge, inspire, and resonate."
+    },
+    {
+      "type": "talesGrid",
+      "editions": [
+        {
+          "type": "edition",
+          "vol": "VOL. 001",
+          "title": "THE GENESIS // NARRATIVE",
+          "tag": "NEW",
+          "status": "available",
+          "description": "Within this volume, you will witness; an epic lie, a sumptuous chicken, divine fury, the philosophy of the human condition and moral conflict.",
+          "image": "/images/covers/genesis.svg"
+        },
+        {
+          "type": "edition",
+          "vol": "VOL. 002",
+          "title": "KINETIC EXPANSION",
+          "tag": "BEST SELLER",
+          "status": "available",
+          "description": "Motion meets meaning. Stories designed for digital consumption, with subtle animations that enhance narrative flow without distraction.",
+          "image": "/images/covers/kinetic.svg"
+        },
+        {
+          "type": "edition",
+          "vol": "VOL. 003",
+          "title": "QUICK HITS: NOIR",
+          "tag": "COMING SOON",
+          "status": "coming-soon",
+          "description": "Dark. Gritty. Uncompromising. A collection of micro-narratives set in shadowed cities and morally ambiguous spaces.",
+          "image": "/images/covers/noir.svg"
+        },
+        {
+          "type": "edition",
+          "vol": "MINI 001",
+          "title": "FLASH: MIDNIGHT",
+          "tag": "MINI",
+          "status": "available",
+          "description": "A standalone micro-narrative. Pure storytelling in its most concentrated form.",
+          "image": "/images/covers/mini-01.svg"
+        },
+        {
+          "type": "edition",
+          "vol": "VOL. 004",
+          "title": "ECHOES: LIMITED RUN",
+          "tag": "LIMITED EDITION",
+          "status": "limited",
+          "description": "A collector's edition. Only 500 copies printed. Featuring exclusive cover art and bonus material.",
+          "image": "/images/covers/echoes.svg"
+        },
+        {
+          "type": "edition",
+          "vol": "VOL. 005",
+          "title": "ARCHIVES: FIRST LIGHT",
+          "tag": "BEST SELLER",
+          "status": "available",
+          "description": "A retrospective collection. The stories that started it all, remastered and reimagined.",
+          "image": "/images/covers/archives.svg"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "title": "New editions",
+      "titleAccent": "biannually.",
+      "body": "Subscribe to stay updated on new releases, exclusive previews, and behind-the-scenes creator insights.",
+      "placeholder": "your@email.com",
+      "buttonLabel": "SUBSCRIBE"
+    }
+  ]
+}

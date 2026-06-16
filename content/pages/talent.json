@@ -1,0 +1,61 @@
+{
+  "type": "page",
+  "slug": "talent",
+  "title": "We're Hiring — Tales 'N' Tells",
+  "sections": [
+    {
+      "type": "pageHeader",
+      "eyebrow": "Join the Movement",
+      "title": "We're Hiring",
+      "subtitle": "Tales 'N' Tells is looking for obsessive creators. People who believe that constraints breed creativity and that every detail matters."
+    },
+    {
+      "type": "recruitment",
+      "rolesTitle": "Open Positions",
+      "roles": [
+        {
+          "type": "role",
+          "icon": "type",
+          "label": "Writer",
+          "description": "Craft surgical narratives that hit like a hammer."
+        },
+        {
+          "type": "role",
+          "icon": "palette",
+          "label": "Artist",
+          "description": "Bring stories to life through high-fidelity visuals."
+        },
+        {
+          "type": "role",
+          "icon": "sparkles",
+          "label": "Letterer",
+          "description": "Master the typography that makes panels sing."
+        },
+        {
+          "type": "role",
+          "icon": "zap",
+          "label": "Motion Studio",
+          "description": "Create kinetic experiences that enhance narrative."
+        },
+        {
+          "type": "role",
+          "icon": "lightbulb",
+          "label": "Strategist",
+          "description": "Shape the future of Tales 'N' Tells."
+        }
+      ],
+      "formTitle": "Submit Your Dossier",
+      "submitLabel": "Submit Dossier",
+      "successTitle": "Dossier Received",
+      "successBody": "We've got your submission. Our team will review and get back to you soon."
+    },
+    {
+      "type": "statement",
+      "title": "Don't See Your Role?",
+      "titleAccent": "We're Always Listening.",
+      "body": "If you're passionate about storytelling and want to push boundaries with us, reach out. We're interested in exceptional people doing exceptional work.",
+      "buttonLabel": "",
+      "buttonUrl": ""
+    }
+  ]
+}

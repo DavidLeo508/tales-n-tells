@@ -1,0 +1,13 @@
+{
+  "type": "header",
+  "logo": "https://www.image2url.com/r2/default/images/1778371159066-920fbaf0-5f9f-469d-8de8-5308037a8aed.png",
+  "logoAlt": "Tales 'N' Tells",
+  "navLinks": [
+    { "type": "navLink", "label": "HOME", "url": "/" },
+    { "type": "navLink", "label": "TALES", "url": "/tales" },
+    { "type": "navLink", "label": "ABOUT", "url": "/about" },
+    { "type": "navLink", "label": "TALENT", "url": "/talent" }
+  ],
+  "ctaLabel": "READ NOW",
+  "ctaUrl": "/tales"
+}

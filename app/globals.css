@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-ink text-bone antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    @apply bg-hero text-white;
+  }
+}
+
+@layer utilities {
+  /* Halftone dot texture used across comic panels */
+  .halftone {
+    background-image: radial-gradient(circle, currentColor 0.5px, transparent 0.5px);
+    background-size: 3px 3px;
+  }
+
+  .comic-panel {
+    @apply border border-bone/10 bg-white/5 relative overflow-hidden;
+    backdrop-filter: blur(4px);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(225, 29, 72, 0.3);
+  }
+
+  .mesh-bg {
+    background-image:
+      radial-gradient(at 0% 0%, hsla(343, 85%, 50%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(240, 15%, 10%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(343, 85%, 50%, 0.1) 0px, transparent 50%);
+  }
+
+  /* Scroll-driven reveal — progressive enhancement, no JS required */
+  .reveal-up {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 25%;
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s infinite;
+  }
+
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+}

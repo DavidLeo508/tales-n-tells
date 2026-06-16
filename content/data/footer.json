@@ -1,0 +1,12 @@
+{
+  "type": "footer",
+  "logo": "https://www.image2url.com/r2/default/images/1778371159066-920fbaf0-5f9f-469d-8de8-5308037a8aed.png",
+  "logoAlt": "Tales 'N' Tells",
+  "socialLinks": [
+    { "type": "navLink", "label": "INSTAGRAM", "url": "#" },
+    { "type": "navLink", "label": "TWITTER", "url": "#" },
+    { "type": "navLink", "label": "TIKTOK", "url": "#" },
+    { "type": "navLink", "label": "SHOP", "url": "/tales" }
+  ],
+  "copyright": "© 2026 TNT LABS. ALL REPRINTS RESERVED."
+}

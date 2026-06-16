@@ -1,0 +1,357 @@
+import { defineStackbitConfig } from "@stackbit/types";
+import { GitContentSource } from "@stackbit/cms-git";
+
+/**
+ * Netlify Visual Editor (Stackbit) configuration.
+ *
+ * Content lives as plain JSON under /content and is matched to the models
+ * below by each file's `type` field. The page components in /components read
+ * the very same files, so anything edited on the visual canvas maps 1:1 to a
+ * field defined here. Field paths annotated in the JSX (`data-sb-field-path`)
+ * resolve against these models.
+ */
+
+const sharedLinkField = {
+  name: "navLink",
+  type: "object" as const,
+  fields: [
+    { name: "label", type: "string" as const },
+    { name: "url", type: "string" as const },
+  ],
+};
+
+const featureItemModel = {
+  name: "featureItem",
+  type: "object" as const,
+  labelField: "title",
+  fields: [
+    {
+      name: "icon",
+      type: "enum" as const,
+      options: ["book-open", "sparkles", "zap", "heart", "palette", "type", "lightbulb"],
+      default: "zap",
+    },
+    { name: "title", type: "string" as const },
+    { name: "description", type: "text" as const },
+  ],
+};
+
+const editionModel = {
+  name: "edition",
+  type: "object" as const,
+  labelField: "title",
+  fields: [
+    { name: "vol", type: "string" as const },
+    { name: "title", type: "string" as const },
+    {
+      name: "tag",
+      type: "enum" as const,
+      options: ["NEW", "BEST SELLER", "COMING SOON", "LIMITED EDITION", "MINI"],
+    },
+    {
+      name: "status",
+      type: "enum" as const,
+      options: ["available", "coming-soon", "limited"],
+    },
+    { name: "description", type: "text" as const },
+    { name: "image", type: "image" as const },
+  ],
+};
+
+const roleModel = {
+  name: "role",
+  type: "object" as const,
+  labelField: "label",
+  fields: [
+    {
+      name: "icon",
+      type: "enum" as const,
+      options: ["type", "palette", "sparkles", "zap", "lightbulb"],
+    },
+    { name: "label", type: "string" as const },
+    { name: "description", type: "text" as const },
+  ],
+};
+
+// ---- Section models ---------------------------------------------------------
+
+const heroSection = {
+  name: "hero",
+  type: "object" as const,
+  label: "Hero",
+  labelField: "title",
+  fields: [
+    { name: "eyebrow", type: "text" as const },
+    { name: "title", type: "text" as const },
+    { name: "titleAccent", type: "string" as const },
+    { name: "backgroundImage", type: "image" as const },
+  ],
+};
+
+const wallpaperCtaSection = {
+  name: "wallpaperCta",
+  type: "object" as const,
+  label: "Wallpaper CTA",
+  labelField: "title",
+  fields: [
+    { name: "eyebrow", type: "string" as const },
+    { name: "title", type: "string" as const },
+    { name: "titleAccent", type: "string" as const },
+    { name: "body", type: "text" as const },
+    { name: "buttonLabel", type: "string" as const },
+    { name: "buttonUrl", type: "string" as const },
+    { name: "imagePrimary", type: "image" as const },
+    { name: "imageSecondary", type: "image" as const },
+  ],
+};
+
+const manifestoSection = {
+  name: "manifesto",
+  type: "object" as const,
+  label: "Manifesto",
+  labelField: "title",
+  fields: [
+    { name: "eyebrow", type: "string" as const },
+    { name: "title", type: "string" as const },
+    { name: "titleAccent", type: "string" as const },
+    { name: "paragraphs", type: "list" as const, items: { type: "text" as const } },
+    { name: "quote", type: "text" as const },
+    { name: "quoteAttribution", type: "string" as const },
+  ],
+};
+
+const whereToBuySection = {
+  name: "whereToBuy",
+  type: "object" as const,
+  label: "Where To Buy",
+  labelField: "title",
+  fields: [
+    { name: "eyebrow", type: "string" as const },
+    { name: "title", type: "string" as const },
+    { name: "titleAccent", type: "string" as const },
+    { name: "body", type: "text" as const },
+    { name: "mapEmbedUrl", type: "string" as const },
+    { name: "storeName", type: "string" as const },
+    { name: "storeAddress", type: "string" as const },
+    { name: "primaryButtonLabel", type: "string" as const },
+    { name: "primaryButtonUrl", type: "string" as const },
+    { name: "secondaryButtonLabel", type: "string" as const },
+    { name: "secondaryButtonUrl", type: "string" as const },
+    { name: "digitalTitle", type: "string" as const },
+    { name: "digitalBody", type: "text" as const },
+    { name: "digitalButtonLabel", type: "string" as const },
+    { name: "digitalButtonUrl", type: "string" as const },
+  ],
+};
+
+const featuresSection = {
+  name: "features",
+  type: "object" as const,
+  label: "Features",
+  labelField: "title",
+  fields: [
+    { name: "eyebrow", type: "string" as const },
+    { name: "title", type: "string" as const },
+    { name: "titleAccent", type: "string" as const },
+    { name: "note", type: "text" as const },
+    { name: "items", type: "list" as const, items: { type: "model" as const, models: ["featureItem"] } },
+  ],
+};
+
+const pageHeaderSection = {
+  name: "pageHeader",
+  type: "object" as const,
+  label: "Page Header",
+  labelField: "title",
+  fields: [
+    { name: "eyebrow", type: "string" as const },
+    { name: "title", type: "string" as const },
+    { name: "subtitle", type: "text" as const },
+  ],
+};
+
+const proseSection = {
+  name: "prose",
+  type: "object" as const,
+  label: "Prose",
+  labelField: "title",
+  fields: [
+    { name: "title", type: "string" as const },
+    { name: "paragraphs", type: "list" as const, items: { type: "text" as const } },
+  ],
+};
+
+const pillarsSection = {
+  name: "pillars",
+  type: "object" as const,
+  label: "Pillars",
+  labelField: "title",
+  fields: [
+    { name: "title", type: "string" as const },
+    { name: "items", type: "list" as const, items: { type: "model" as const, models: ["featureItem"] } },
+  ],
+};
+
+const statementSection = {
+  name: "statement",
+  type: "object" as const,
+  label: "Statement",
+  labelField: "title",
+  fields: [
+    { name: "title", type: "string" as const },
+    { name: "titleAccent", type: "string" as const },
+    { name: "body", type: "text" as const },
+    { name: "buttonLabel", type: "string" as const },
+    { name: "buttonUrl", type: "string" as const },
+  ],
+};
+
+const talesGridSection = {
+  name: "talesGrid",
+  type: "object" as const,
+  label: "Tales Grid",
+  fields: [
+    { name: "editions", type: "list" as const, items: { type: "model" as const, models: ["edition"] } },
+  ],
+};
+
+const newsletterSection = {
+  name: "newsletter",
+  type: "object" as const,
+  label: "Newsletter",
+  labelField: "title",
+  fields: [
+    { name: "title", type: "string" as const },
+    { name: "titleAccent", type: "string" as const },
+    { name: "body", type: "text" as const },
+    { name: "placeholder", type: "string" as const },
+    { name: "buttonLabel", type: "string" as const },
+  ],
+};
+
+const recruitmentSection = {
+  name: "recruitment",
+  type: "object" as const,
+  label: "Recruitment",
+  fields: [
+    { name: "rolesTitle", type: "string" as const },
+    { name: "roles", type: "list" as const, items: { type: "model" as const, models: ["role"] } },
+    { name: "formTitle", type: "string" as const },
+    { name: "submitLabel", type: "string" as const },
+    { name: "successTitle", type: "string" as const },
+    { name: "successBody", type: "text" as const },
+  ],
+};
+
+const sectionModelNames = [
+  "hero",
+  "wallpaperCta",
+  "manifesto",
+  "whereToBuy",
+  "features",
+  "pageHeader",
+  "prose",
+  "pillars",
+  "statement",
+  "talesGrid",
+  "newsletter",
+  "recruitment",
+];
+
+const pageModel = {
+  name: "page",
+  type: "page" as const,
+  urlPath: "/{slug}",
+  filePath: "content/pages/{slug}.json",
+  fields: [
+    { name: "title", type: "string" as const, required: true },
+    {
+      name: "sections",
+      type: "list" as const,
+      items: { type: "model" as const, models: sectionModelNames },
+    },
+  ],
+};
+
+const headerModel = {
+  name: "header",
+  type: "data" as const,
+  singleInstance: true,
+  filePath: "content/data/header.json",
+  fields: [
+    { name: "logo", type: "image" as const },
+    { name: "logoAlt", type: "string" as const },
+    { name: "navLinks", type: "list" as const, items: { type: "model" as const, models: ["navLink"] } },
+    { name: "ctaLabel", type: "string" as const },
+    { name: "ctaUrl", type: "string" as const },
+  ],
+};
+
+const footerModel = {
+  name: "footer",
+  type: "data" as const,
+  singleInstance: true,
+  filePath: "content/data/footer.json",
+  fields: [
+    { name: "logo", type: "image" as const },
+    { name: "logoAlt", type: "string" as const },
+    { name: "socialLinks", type: "list" as const, items: { type: "model" as const, models: ["navLink"] } },
+    { name: "copyright", type: "string" as const },
+  ],
+};
+
+export default defineStackbitConfig({
+  stackbitVersion: "~0.7.0",
+  ssgName: "nextjs",
+  nodeVersion: "20",
+  contentSources: [
+    new GitContentSource({
+      rootPath: __dirname,
+      contentDirs: ["content"],
+      models: [
+        pageModel,
+        headerModel,
+        footerModel,
+        sharedLinkField,
+        featureItemModel,
+        editionModel,
+        roleModel,
+        heroSection,
+        wallpaperCtaSection,
+        manifestoSection,
+        whereToBuySection,
+        featuresSection,
+        pageHeaderSection,
+        proseSection,
+        pillarsSection,
+        statementSection,
+        talesGridSection,
+        newsletterSection,
+        recruitmentSection,
+      ],
+      assetsConfig: {
+        referenceType: "static",
+        staticDir: "public",
+        uploadDir: "images",
+        publicPath: "/",
+      },
+    }),
+  ],
+  // Map page documents to site URLs. The home page lives in home.json but is
+  // served from the site root.
+  siteMap: ({ documents, models }) => {
+    const pageModelNames = models.filter((m) => m.type === "page").map((m) => m.name);
+    return documents
+      .filter((doc) => pageModelNames.includes(doc.modelName))
+      .map((document) => {
+        const slug = (document.fields.slug as { value?: string } | undefined)?.value;
+        const urlPath = !slug || slug === "home" ? "/" : `/${slug}`;
+        return {
+          stableId: document.id,
+          urlPath,
+          document,
+          isHomePage: urlPath === "/",
+        };
+      });
+  },
+});
