@@ -36,8 +36,8 @@ function relativeId(filePath: string): string {
   return path.relative(process.cwd(), filePath).split(path.sep).join("/");
 }
 
-/** Read a singleton data file (header, footer) and attach Stackbit metadata. */
-export function getData(name: "header" | "footer"): ContentObject {
+/** Read a singleton data file (header, footer, entry) and attach Stackbit metadata. */
+export function getData(name: "header" | "footer" | "entry"): ContentObject {
   const filePath = path.join(DATA_DIR, `${name}.json`);
   const data = readJson(filePath);
   return {

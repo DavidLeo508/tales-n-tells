@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import EntryExperience, { type EntryContent } from "@/components/EntryExperience";
+import { getData } from "@/lib/content";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -25,10 +27,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const entry = getData("entry") as unknown as EntryContent;
   return (
     <html lang="en" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans bg-ink text-bone min-h-screen flex flex-col">
-        {children}
+        <EntryExperience entry={entry}>{children}</EntryExperience>
       </body>
     </html>
   );
