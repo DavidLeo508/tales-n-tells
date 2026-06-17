@@ -181,12 +181,19 @@ export default function EntryExperience({
   // Returning visitors within the same session skip straight to the site.
   useEffect(() => {
     if (entry.enabled === false) return;
-    // Inside the Netlify Visual Editor the preview renders in an iframe. Keep
-    // the gate visible there (ignoring the once-per-session flag) so its copy,
-    // logo and warning stay clickable and editable on the canvas.
+    // Inside the Netlify Visual Editor the preview renders in an iframe. The
+    // gate is a full-screen overlay (fixed inset-0, z-[200]); if it stayed up
+    // it would cover every page and block editors from selecting anything
+    // underneath — the tales-page buttons, the tag sorter, any section. So
+    // dismiss it in the editor and reveal the full, editable site. The intro
+    // itself stays editable from the editor's content sidebar, where it
+    // appears as the "Entry Experience" data singleton.
     const inVisualEditor =
       typeof window !== "undefined" && window.self !== window.top;
-    if (inVisualEditor) return;
+    if (inVisualEditor) {
+      setPhase("done");
+      return;
+    }
     if (sessionStorage.getItem(SESSION_KEY) === "true") {
       setPhase("done");
     }
