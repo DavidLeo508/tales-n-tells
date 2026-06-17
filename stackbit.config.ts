@@ -287,6 +287,10 @@ const pageModel = {
   filePath: "content/pages/{slug}.json",
   fields: [
     { name: "title", type: "string" as const, required: true },
+    // `slug` must be a declared field so it appears in `document.fields` and
+    // the siteMap below can resolve each page to its own URL. Without it every
+    // page collapses to "/" and only the home page is reachable in the editor.
+    { name: "slug", type: "string" as const, required: true },
     {
       name: "sections",
       type: "list" as const,
@@ -439,7 +443,12 @@ export default defineStackbitConfig({
     return documents
       .filter((doc) => pageModelNames.includes(doc.modelName))
       .map((document) => {
-        const slug = (document.fields.slug as { value?: string } | undefined)?.value;
+        // Prefer the declared slug field; fall back to the document id (the
+        // file path, e.g. content/pages/tales.json) so a page always resolves
+        // to its own URL even if the field is missing.
+        const fieldSlug = (document.fields?.slug as { value?: string } | undefined)?.value;
+        const idSlug = document.id?.split("/").pop()?.replace(/\.json$/, "");
+        const slug = fieldSlug || idSlug;
         const urlPath = !slug || slug === "home" ? "/" : `/${slug}`;
         return {
           stableId: document.id,
