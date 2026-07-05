@@ -76,7 +76,7 @@
                         {
                             "type": "editionButton",
                             "label": "COLLECT PRINT",
-                            "variant": "digital"
+                            "variant": "print"
                         }
                     ]
                 }
