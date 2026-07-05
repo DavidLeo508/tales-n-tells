@@ -45,7 +45,7 @@
             "primaryButtonLabel": "Visit on Instagram",
             "primaryButtonUrl": "https://www.instagram.com/akukocomicshop?igsh=MWViaWQzOW1jYWlvMA==",
             "secondaryButtonLabel": "Contact Us",
-            "secondaryButtonUrl": "#contact",
+            "secondaryButtonUrl": "<a href=\"tel:+23409037065378\">Call me</a>",
             "digitalTitle": "Prefer Digital?",
             "digitalBody": "Get instant access to Tales 'N' Tells and start reading right now. No waiting, no shipping—just pure storytelling.",
             "digitalButtonLabel": "Get Digital Copy",
