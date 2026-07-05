@@ -72,6 +72,11 @@
                             "type": "editionButton",
                             "label": "GET DIGITAL",
                             "variant": "digital"
+                        },
+                        {
+                            "type": "editionButton",
+                            "label": "GET DIGITAL",
+                            "variant": "digital"
                         }
                     ]
                 }
