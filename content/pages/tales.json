@@ -38,6 +38,27 @@
                 },
                 {
                     "type": "edition",
+                    "vol": "VOL. 002",
+                    "title": "Tales 'N' Tells",
+                    "tag": "NEW",
+                    "status": "available",
+                    "description": "In this volume, you'll encounter tradition, a tyrant's downfall, impossible justice, timeless culinary folklore, and a looping reality. Every tale asks a different question, but they all leave behind the same thing...A consequence.",
+                    "image": "/images/1_20260624_234948_0000.png",
+                    "buttons": [
+                        {
+                            "type": "editionButton",
+                            "label": "GET DIGITAL",
+                            "variant": "digital"
+                        },
+                        {
+                            "type": "editionButton",
+                            "label": "COLLECT PRINT",
+                            "variant": "print"
+                        }
+                    ]
+                },
+                {
+                    "type": "edition",
                     "vol": "MINI VOL. 001",
                     "title": "Tales 'N' Tells Mini",
                     "tag": "NEW",
@@ -55,27 +76,6 @@
                             "type": "editionButton",
                             "label": "COLLECT PRINT",
                             "url": "#",
-                            "variant": "print"
-                        }
-                    ]
-                },
-                {
-                    "type": "edition",
-                    "vol": "VOL. 002",
-                    "title": "Tales 'N' Tells",
-                    "tag": "NEW",
-                    "status": "available",
-                    "description": "In this volume, you'll encounter tradition, a tyrant's downfall, impossible justice, timeless culinary folklore, and a looping reality. Every tale asks a different question, but they all leave behind the same thing...A consequence.",
-                    "image": "/images/1_20260624_234948_0000.png",
-                    "buttons": [
-                        {
-                            "type": "editionButton",
-                            "label": "GET DIGITAL",
-                            "variant": "digital"
-                        },
-                        {
-                            "type": "editionButton",
-                            "label": "COLLECT PRINT",
                             "variant": "print"
                         }
                     ]
