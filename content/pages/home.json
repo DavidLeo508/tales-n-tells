@@ -45,7 +45,7 @@
             "primaryButtonLabel": "Visit on Instagram",
             "primaryButtonUrl": "<a href=\"tel:+2349037065378\">09037065378</a>",
             "secondaryButtonLabel": "Contact Us",
-            "secondaryButtonUrl": "<a href=\"tel:+23409037065378\">Call me</a>",
+            "secondaryButtonUrl": "tel:+2349037065378",
             "digitalTitle": "Prefer Digital?",
             "digitalBody": "Get instant access to Tales 'N' Tells and start reading right now. No waiting, no shipping—just pure storytelling.",
             "digitalButtonLabel": "Get Digital Copy",
