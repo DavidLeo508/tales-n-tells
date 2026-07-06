@@ -11,6 +11,7 @@
         },
         {
             "type": "talesGrid",
+            "filterLabel": "Sort by tag",
             "editions": [
                 {
                     "type": "edition",
@@ -19,7 +20,43 @@
                     "tag": "BEST SELLER",
                     "status": "available",
                     "description": "Within this volume, you will witness; an epic lie, a sumptuous chicken, divine fury, the philosophy of the human condition and moral conflict.",
-                    "image": "/images/Tales'n'Tells volume 1 (done-s1)_page-0001.jpg"
+                    "image": "/images/Tales'n'Tells volume 1 (done-s1)_page-0001.jpg",
+                    "buttons": [
+                        {
+                            "type": "editionButton",
+                            "label": "GET DIGITAL",
+                            "url": "https://selar.com/talesntells",
+                            "variant": "digital"
+                        },
+                        {
+                            "type": "editionButton",
+                            "label": "COLLECT PRINT",
+                            "url": "#",
+                            "variant": "print"
+                        }
+                    ]
+                },
+                {
+                    "type": "edition",
+                    "vol": "VOL. 002",
+                    "title": "Tales 'N' Tells",
+                    "tag": "NEW",
+                    "status": "available",
+                    "description": "In this volume, you'll encounter tradition, a tyrant's downfall, impossible justice, timeless culinary folklore, and a looping reality. Every tale asks a different question, but they all leave behind the same thing...A consequence.",
+                    "image": "/images/1_20260624_234948_0000.png",
+                    "buttons": [
+                        {
+                            "type": "editionButton",
+                            "label": "GET DIGITAL",
+                            "variant": "digital",
+                            "url": "https://selar.com/2ls8xd184i"
+                        },
+                        {
+                            "type": "editionButton",
+                            "label": "COLLECT PRINT",
+                            "variant": "print"
+                        }
+                    ]
                 },
                 {
                     "type": "edition",
@@ -28,16 +65,21 @@
                     "tag": "NEW",
                     "status": "available",
                     "description": "For Kids!!!\nWithin this volume, you will discover, A Queen's Enduring Legacy, An Obsolete Savior and The High Price of a Tall Tale. This is not just a collection of quick reads. This is a spark for imagination.",
-                    "image": "/images/tHE BOY WHO LIED_20260525_185219_0000-1.jpg"
-                },
-                {
-                    "type": "edition",
-                    "vol": "VOl. 002",
-                    "title": "Tales 'N' Tells",
-                    "tag": "COMING SOON",
-                    "status": "coming-soon",
-                    "description": "​The follow-up to the flash fiction comic anthology everyone is talking about is under creative construction. Amazing stories, fantastic art, and the same quick-hit energy you love.",
-                    "image": "/images/The tale of_20260616_181559_0000.jpg"
+                    "image": "/images/tHE BOY WHO LIED_20260525_185219_0000-1.jpg",
+                    "buttons": [
+                        {
+                            "type": "editionButton",
+                            "label": "GET DIGITAL",
+                            "url": "https://selar.com/sa58j87573",
+                            "variant": "digital"
+                        },
+                        {
+                            "type": "editionButton",
+                            "label": "COLLECT PRINT",
+                            "url": "#",
+                            "variant": "print"
+                        }
+                    ]
                 }
             ]
         },
