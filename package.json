@@ -1,29 +1,28 @@
 {
-  "name": "tales-n-tells",
-  "version": "1.0.0",
+  "name": "tnt111",
   "private": true,
-  "description": "Tales 'N' Tells — a flash-fiction comic anthology site, built with Next.js and editable via Netlify Visual Editor (Stackbit).",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "next dev -p 3000",
-    "start": "next start -p 3000",
+    "dev": "next dev",
     "build": "next build",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
-    "lucide-react": "^0.456.0",
-    "next": "^14.2.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@stackbit/cms-git": "1.0.38",
+    "@stackbit/types": "2.1.15",
+    "lucide-react": "1.20.0",
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "tailwindcss": "3.4.19"
   },
   "devDependencies": {
-    "@stackbit/cms-git": "^1.0.7",
-    "@stackbit/types": "^2.0.0",
-    "@types/node": "^20.16.11",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3"
+    "@types/node": "25.9.3",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "autoprefixer": "10.5.0",
+    "postcss": "8.5.15",
+    "typescript": "6.0.3"
   }
 }
