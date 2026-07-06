@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowDown, Lock } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { Icon } from "@/components/Icon";
 import RecruitmentForm from "@/components/RecruitmentForm";
 import NewsletterForm from "@/components/NewsletterForm";
+import TalesGrid from "@/components/TalesGrid";
 import type { Section } from "@/lib/content";
 
 /* eslint-disable @next/next/no-img-element */
@@ -11,14 +12,6 @@ interface FeatureItem {
   icon: string;
   title: string;
   description: string;
-}
-interface Edition {
-  vol: string;
-  title: string;
-  tag: string;
-  status: string;
-  description: string;
-  image: string;
 }
 interface Role {
   icon: string;
@@ -427,59 +420,8 @@ function Statement({ section }: { section: Section }) {
 }
 
 /* --- Tales Grid ----------------------------------------------------------- */
-function TalesGrid({ section }: { section: Section }) {
-  const editions = (section.editions as Edition[]) ?? [];
-  return (
-    <section className="px-6 pb-24">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-sb-field-path=".editions">
-          {editions.map((edition, i) => {
-            const locked = edition.status === "coming-soon";
-            return (
-              <div key={i} data-sb-field-path={`.${i}`} className="group relative">
-                <div className="relative overflow-hidden bg-bone/5 border border-bone/10 hover:border-accent/50 transition-all duration-500">
-                  <div className="relative aspect-[3/4] overflow-hidden bg-ink">
-                    <img
-                      src={edition.image}
-                      alt={edition.title}
-                      data-sb-field-path=".image#@src"
-                      className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
-                    />
-                    <div data-sb-field-path=".tag" className="absolute top-4 right-4 px-3 py-1 bg-accent text-white text-[10px] font-bold tracking-widest uppercase">
-                      {edition.tag}
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
-                      {locked ? (
-                        <span className="w-full px-4 py-3 bg-bone/10 text-bone/40 text-center font-bold text-xs tracking-widest uppercase flex items-center justify-center gap-2">
-                          <Lock className="w-3 h-3" /> COMING SOON
-                        </span>
-                      ) : (
-                        <span className="w-full px-4 py-3 bg-accent text-white text-center font-bold text-xs tracking-widest uppercase">
-                          GET DIGITAL →
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="p-6 bg-gradient-to-b from-bone/5 to-ink">
-                    <span data-sb-field-path=".vol" className="text-accent font-mono text-[10px] tracking-[0.3em] uppercase block mb-2">
-                      {edition.vol}
-                    </span>
-                    <h3 data-sb-field-path=".title" className="text-lg font-black italic tracking-tight uppercase leading-tight mb-3">
-                      {edition.title}
-                    </h3>
-                    <p data-sb-field-path=".description" className="text-bone/50 text-xs leading-relaxed">
-                      {edition.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
+// `TalesGrid` lives in its own client component (tag sorter + interactive
+// buttons) — see components/TalesGrid.tsx.
 
 /* --- Newsletter ----------------------------------------------------------- */
 function Newsletter({ section }: { section: Section }) {

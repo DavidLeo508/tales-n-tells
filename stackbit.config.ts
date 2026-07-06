@@ -36,6 +36,22 @@ const featureItemModel = {
   ],
 };
 
+const editionButtonModel = {
+  name: "editionButton",
+  type: "object" as const,
+  labelField: "label",
+  fields: [
+    { name: "label", type: "string" as const, default: "GET DIGITAL" },
+    { name: "url", type: "string" as const },
+    {
+      name: "variant",
+      type: "enum" as const,
+      options: ["digital", "print"],
+      default: "digital",
+    },
+  ],
+};
+
 const editionModel = {
   name: "edition",
   type: "object" as const,
@@ -55,6 +71,11 @@ const editionModel = {
     },
     { name: "description", type: "text" as const },
     { name: "image", type: "image" as const },
+    {
+      name: "buttons",
+      type: "list" as const,
+      items: { type: "model" as const, models: ["editionButton"] },
+    },
   ],
 };
 
@@ -211,6 +232,7 @@ const talesGridSection = {
   type: "object" as const,
   label: "Tales Grid",
   fields: [
+    { name: "filterLabel", type: "string" as const },
     { name: "editions", type: "list" as const, items: { type: "model" as const, models: ["edition"] } },
   ],
 };
@@ -265,6 +287,10 @@ const pageModel = {
   filePath: "content/pages/{slug}.json",
   fields: [
     { name: "title", type: "string" as const, required: true },
+    // `slug` must be a declared field so it appears in `document.fields` and
+    // the siteMap below can resolve each page to its own URL. Without it every
+    // page collapses to "/" and only the home page is reachable in the editor.
+    { name: "slug", type: "string" as const, required: true },
     {
       name: "sections",
       type: "list" as const,
@@ -300,6 +326,77 @@ const footerModel = {
   ],
 };
 
+const entryModel = {
+  name: "entry",
+  type: "data" as const,
+  label: "Entry Experience",
+  description:
+    "The intro that plays before the site: a landing screen with the logo and Experience button, a photosensitivity warning, then the transition video. Editing happens here; toggle it off to send visitors straight to the site.",
+  singleInstance: true,
+  filePath: "content/data/entry.json",
+  fields: [
+    {
+      name: "enabled",
+      type: "boolean" as const,
+      label: "Show entry experience",
+      description:
+        "Turn the whole intro on or off. When off, visitors land directly on the site with no gate, warning or video.",
+      default: true,
+    },
+    {
+      name: "eyebrow",
+      type: "string" as const,
+      label: "Tagline",
+      description: "Small line of text above the logo on the landing screen.",
+    },
+    {
+      name: "logo",
+      type: "image" as const,
+      description: "Logo shown on the landing screen.",
+    },
+    { name: "logoAlt", type: "string" as const, label: "Logo alt text" },
+    {
+      name: "buttonLabel",
+      type: "string" as const,
+      label: "Enter button label",
+      description: "Text on the button visitors click to start the intro.",
+    },
+    {
+      name: "enterCue",
+      type: "string" as const,
+      label: "Scroll cue text",
+      description: "Small hint shown beneath the button (e.g. \"ENTER\").",
+    },
+    {
+      name: "warningTitle",
+      type: "string" as const,
+      label: "Warning heading",
+      description: "Heading of the photosensitivity warning screen.",
+    },
+    {
+      name: "warningBody",
+      type: "text" as const,
+      label: "Warning message",
+      description: "Body text of the photosensitivity warning screen.",
+    },
+    {
+      name: "warningDuration",
+      type: "number" as const,
+      label: "Warning duration (ms)",
+      description:
+        "How long the photosensitivity warning stays on screen before the video plays, in milliseconds.",
+      default: 1500,
+    },
+    {
+      name: "video",
+      type: "string" as const,
+      label: "Transition video",
+      description:
+        "Path to the transition video that plays after the warning, relative to the site root (e.g. /videos/transition.mp4). Upload the file into public/videos and reference it here.",
+    },
+  ],
+};
+
 export default defineStackbitConfig({
   stackbitVersion: "~0.7.0",
   ssgName: "nextjs",
@@ -312,8 +409,10 @@ export default defineStackbitConfig({
         pageModel,
         headerModel,
         footerModel,
+        entryModel,
         sharedLinkField,
         featureItemModel,
+        editionButtonModel,
         editionModel,
         roleModel,
         heroSection,
@@ -344,7 +443,12 @@ export default defineStackbitConfig({
     return documents
       .filter((doc) => pageModelNames.includes(doc.modelName))
       .map((document) => {
-        const slug = (document.fields.slug as { value?: string } | undefined)?.value;
+        // Prefer the declared slug field; fall back to the document id (the
+        // file path, e.g. content/pages/tales.json) so a page always resolves
+        // to its own URL even if the field is missing.
+        const fieldSlug = (document.fields?.slug as { value?: string } | undefined)?.value;
+        const idSlug = document.id?.split("/").pop()?.replace(/\.json$/, "");
+        const slug = fieldSlug || idSlug;
         const urlPath = !slug || slug === "home" ? "/" : `/${slug}`;
         return {
           stableId: document.id,
