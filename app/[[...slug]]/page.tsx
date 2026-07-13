@@ -19,20 +19,32 @@ export function generateStaticParams(): Params[] {
   }));
 }
 
-export function generateMetadata({ params }: { params: Params }) {
-  const page = getPageBySlug(slugFromSegments(params.slug));
-  return { title: page?.title ?? "Tales 'N' Tells" };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  const page = getPageBySlug(slugFromSegments(slug));
+
+  return {
+    title: page?.title ?? "Tales 'N' Tells",
+  };
 }
 
-export default function Page({ params }: { params: Params }) {
-  const page = getPageBySlug(slugFromSegments(params.slug));
+export default async function Page({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  const page = getPageBySlug(slugFromSegments(slug));
+
   if (!page) notFound();
 
   return (
     <>
       <Header />
-      {/* The page object id anchors every relative `data-sb-field-path`
-          rendered by the sections below. */}
       <main className="flex-grow" data-sb-object-id={page.__metadata.id}>
         <Sections sections={page.sections} />
       </main>
