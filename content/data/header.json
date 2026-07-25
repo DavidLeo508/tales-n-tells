@@ -1,0 +1,34 @@
+{
+    "type": "header",
+    "logo": "/images/1000048852.png",
+    "logoAlt": "Tales 'N' Tells",
+    "navLinks": [
+        {
+            "type": "navLink",
+            "label": "HOME",
+            "url": "/"
+        },
+        {
+            "type": "navLink",
+            "label": "TALES",
+            "url": "/tales"
+        },
+        {
+            "type": "navLink",
+            "label": "ABOUT",
+            "url": "/about"
+        },
+        {
+            "type": "navLink",
+            "label": "TALENT",
+            "url": "/talent"
+        },
+        {
+            "type": "navLink",
+            "label": "CREATORS",
+            "url": "/not-found"
+        }
+    ],
+    "ctaLabel": "EXPERIENCE",
+    "ctaUrl": "/tales"
+}

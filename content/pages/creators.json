@@ -1,0 +1,104 @@
+{
+    "type": "page",
+    "slug": "creators",
+    "title": "Tales 'N' Tells — Creators",
+    "sections": [
+        {
+            "type": "creatorsGrid",
+            "eyebrow": "The People Behind The Panels",
+            "title": "Meet the",
+            "titleAccent": "Creators",
+            "subtitle": "Writers, artists, colorists and letterers — the crew turning quick-read scripts into finished panels.",
+            "creators": [
+                {
+                    "name": "Jocelyn Marsh",
+                    "role": "Writer",
+                    "bio": "Crafts the scripts that start every issue — sharp hooks, tighter endings.",
+                    "image": "/images/creators/jocelyn-neutral.svg",
+                    "imageHover": "/images/creators/jocelyn-smile.svg",
+                    "links": [
+                        { "platform": "instagram", "url": "#" },
+                        { "platform": "x", "url": "#" }
+                    ]
+                },
+                {
+                    "name": "Martin Okoye",
+                    "role": "Artist",
+                    "bio": "Pencils and inks every panel, from thumbnail to final line art.",
+                    "image": "/images/creators/martin-neutral.svg",
+                    "imageHover": "/images/creators/martin-smile.svg",
+                    "links": [
+                        { "platform": "instagram", "url": "#" },
+                        { "platform": "dribbble", "url": "#" }
+                    ]
+                },
+                {
+                    "name": "Priya Nair",
+                    "role": "Colorist",
+                    "bio": "Builds the mood of each issue through light, palette and grade.",
+                    "image": "/images/creators/priya-neutral.svg",
+                    "imageHover": "/images/creators/priya-smile.svg",
+                    "links": [
+                        { "platform": "instagram", "url": "#" },
+                        { "platform": "youtube", "url": "#" }
+                    ]
+                },
+                {
+                    "name": "Leo Duarte",
+                    "role": "Letterer",
+                    "bio": "Typesets dialogue and sound effects so every panel reads clean.",
+                    "image": "/images/creators/leo-neutral.svg",
+                    "imageHover": "/images/creators/leo-smile.svg",
+                    "links": [
+                        { "platform": "facebook", "url": "#" },
+                        { "platform": "x", "url": "#" }
+                    ]
+                },
+                {
+                    "name": "Amara Chen",
+                    "role": "Motion Designer",
+                    "bio": "Turns finished pages into the kinetic-art cuts we post online.",
+                    "image": "/images/creators/amara-neutral.svg",
+                    "imageHover": "/images/creators/amara-smile.svg",
+                    "links": [
+                        { "platform": "youtube", "url": "#" },
+                        { "platform": "instagram", "url": "#" }
+                    ]
+                },
+                {
+                    "name": "Ryo Tanaka",
+                    "role": "Artist",
+                    "bio": "Handles cover art and the standalone flash-fiction one-shots.",
+                    "image": "/images/creators/ryo-neutral.svg",
+                    "imageHover": "/images/creators/ryo-smile.svg",
+                    "links": [
+                        { "platform": "dribbble", "url": "#" },
+                        { "platform": "instagram", "url": "#" }
+                    ]
+                },
+                {
+                    "name": "Ines Kova",
+                    "role": "Writer",
+                    "bio": "Co-writes the ongoing anthology arcs and edits every script pass.",
+                    "image": "/images/creators/ines-neutral.svg",
+                    "imageHover": "/images/creators/ines-smile.svg",
+                    "links": [
+                        { "platform": "x", "url": "#" },
+                        { "platform": "facebook", "url": "#" }
+                    ]
+                },
+                {
+                    "name": "Sam Okafor",
+                    "role": "Affiliate Marketer",
+                    "bio": "Runs partnerships and keeps Tales 'N' Tells on shop shelves.",
+                    "image": "/images/creators/sam-neutral.svg",
+                    "imageHover": "/images/creators/sam-smile.svg",
+                    "links": [
+                        { "platform": "instagram", "url": "#" },
+                        { "platform": "youtube", "url": "#" }
+                    ]
+                }
+            ]
+        }
+    ]
+}

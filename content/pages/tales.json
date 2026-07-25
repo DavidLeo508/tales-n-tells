@@ -1,0 +1,113 @@
+{
+    "type": "page",
+    "slug": "tales",
+    "title": "Tales 'N' Tells — Home",
+    "sections": [
+        {
+            "type": "pageHeader",
+            "eyebrow": "Tales Told",
+            "title": "The Tale Vault",
+            "subtitle": "Every volume is a standalone experience. Curated collections of flash-fiction comics designed to challenge, inspire, and resonate."
+        },
+        {
+  "type": "talesGrid",
+  "filterLabel": "Sort by tag",
+  "printStores": [
+    {
+      "name": "Akuko Comic Book Store",
+      "address": "2C Adedeji Adekola, Lekki, Lagos, Nigeria",
+      "whatsappUrl": "https://wa.me/2347077156204?text=Hello%2C%20I%20would%20like%20to%20order%20a%20physical%20copy%20of%20Tales%20%27N%27%20Tells."
+    },
+    {
+      "name": "Didi Museum",
+      "address": "175Akin, Akin Adesola St, Victoria Island, Lagos",
+      "whatsappUrl": "https://wa.me/2349015340090?text=Hello%2C%20I%20would%20like%20to%20order%20a%20physical%20copy%20of%20Tales%20%27N%27%20Tells."
+    },
+    {
+      "name": "BookNook",
+      "address": "Block 31 Plot, Gateview Plaza, Lekki 1 Lagos NG, 11 Admiralty Wy, Eti-Osa, Lagos",
+      "whatsappUrl": "https://wa.me/2349085648059?text=Hello%2C%20I%20would%20like%20to%20order%20a%20physical%20copy%20of%20Tales%20%27N%27%20Tells."
+    }
+  ],
+  "editions": [
+                {
+                    "type": "edition",
+                    "vol": "VOL. 001",
+                    "title": "Tales 'N' Tells",
+                    "tag": "BEST SELLER",
+                    "status": "available",
+                    "description": "Within this volume, you will witness; an epic lie, a sumptuous chicken, divine fury, the philosophy of the human condition and moral conflict.",
+                    "image": "/images/Tales'n'Tells volume 1 (done-s1)_page-0001.jpg",
+                    "buttons": [
+                        {
+                            "type": "editionButton",
+                            "label": "GET DIGITAL",
+                            "url": "https://selar.com/talesntells",
+                            "variant": "digital"
+                        },
+                        {
+                            "type": "editionButton",
+                            "label": "COLLECT PRINT",
+                            "url": "#",
+                            "variant": "print"
+                        }
+                    ]
+                },
+                {
+                    "type": "edition",
+                    "vol": "VOL. 002",
+                    "title": "Tales 'N' Tells",
+                    "tag": "NEW",
+                    "status": "available",
+                    "description": "In this volume, you'll encounter tradition, a tyrant's downfall, impossible justice, timeless culinary folklore, and a looping reality. Every tale asks a different question, but they all leave behind the same thing...A consequence.",
+                    "image": "/images/1_20260624_234948_0000.png",
+                    "buttons": [
+                        {
+                            "type": "editionButton",
+                            "label": "GET DIGITAL",
+                            "variant": "digital",
+                            "url": "https://selar.com/2ls8xd184i"
+                        },
+                        {
+                            "type": "editionButton",
+                            "label": "COLLECT PRINT",
+                            "variant": "print"
+                        }
+                    ]
+                },
+                {
+                    "type": "edition",
+                    "vol": "MINI VOL. 001",
+                    "title": "Tales 'N' Tells Mini",
+                    "tag": "NEW",
+                    "status": "available",
+                    "description": "For Kids!!!\nWithin this volume, you will discover, A Queen's Enduring Legacy, An Obsolete Savior and The High Price of a Tall Tale. This is not just a collection of quick reads. This is a spark for imagination.",
+                    "image": "/images/tHE BOY WHO LIED_20260525_185219_0000-1.jpg",
+                    "buttons": [
+                        {
+                            "type": "editionButton",
+                            "label": "GET DIGITAL",
+                            "url": "https://selar.com/sa58j87573",
+                            "variant": "digital"
+                        },
+                        {
+                            "type": "editionButton",
+                            "label": "COLLECT PRINT",
+                            "url": "#",
+                            "variant": "print"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "newsletter",
+            "title": "New editions",
+            "titleAccent": "biannually.",
+            "body": "Subscribe to stay updated on new releases, exclusive previews, and behind-the-scenes creator insights.",
+            "placeholder": "your@email.com",
+            "buttonLabel": "SUBSCRIBE"
+        }
+    ]
+}
+

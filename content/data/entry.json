@@ -1,0 +1,13 @@
+{
+    "type": "entry",
+    "enabled": true,
+    "eyebrow": "QUICK-READ NARRATIVES / HIGH-IMPACT VISUALS",
+    "logo": "/images/1000048852.png",
+    "logoAlt": "Tales 'N' Tells",
+    "buttonLabel": "EXPERIENCE",
+    "enterCue": "ENTER",
+    "warningTitle": "PHOTOSENSITIVITY WARNING",
+    "warningBody": "This video contains rapid flashing and visual effects that may trigger photosensitive epilepsy or discomfort in sensitive individuals.",
+    "warningDuration": 1500,
+    "video": "/videos/transition.mp4"
+}

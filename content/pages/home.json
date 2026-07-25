@@ -1,0 +1,103 @@
+{
+    "type": "page",
+    "slug": "home",
+    "title": "Tales 'N' Tells — Home",
+    "sections": [
+        {
+            "type": "hero",
+            "eyebrow": "An anthology that dares to explore the unconventional through flash-fictional comics",
+            "title": "Tales Worth\nTelling",
+            "titleAccent": "Twice Over.",
+            "backgroundImage": "/images/Untitled design_20251226_194307_0000.png"
+        },
+        {
+            "type": "wallpaperCta",
+            "eyebrow": "Exclusive Content",
+            "title": "Claim Your",
+            "titleAccent": "Free Wallpaper Pack",
+            "body": "Don't stop at reading the stories. Carry the visuals everywhere you go. Download our exclusive high-resolution wallpaper collection inspired by Tales 'N' Tells.",
+            "buttonLabel": "Download Now",
+            "buttonUrl": "https://drive.google.com/drive/folders/1-xfz0BablcbZgfAtTHj80IHKp0GtW3Jr",
+            "imagePrimary": "/images/the pecker.jpg",
+            "imageSecondary": "/images/a gods tantrum.jpg"
+        },
+        {
+            "type": "manifesto",
+            "eyebrow": "Quick Read System",
+            "title": "minimum pages",
+            "titleAccent": "maximum resonance",
+            "paragraphs": [
+                "We believe storytelling is drifting into the redundant. Tales 'N' Tells is an intervention, squick digest narratives delivered through sequential art. We respect your time, but we demand your focus."
+            ],
+            "quote": "It's not about how long it takes to read. It's about how long it stays with you.",
+            "quoteAttribution": "Manifesto // Ed. 01"
+        },
+{
+  "type": "whereToBuy",
+  "eyebrow": "Physical & Digital",
+  "title": "Paper Pages.",
+  "titleAccent": "Digital Access.",
+  "body": "Whether you crave the feel of pages in your hand or the freedom of reading digitally, your copy of Tales 'N' Tells is just a purchase away. Find us at our partner comic book shops or grab the digital edition instantly.",
+
+  "mapEmbedUrl": "https://www.google.com/maps/d/embed?mid=1LaFBz6MPtt3YI2ZlIa-6uvAhkyDF2hc&ehbc=2E312F",
+
+  "stores": [
+  {
+    "name": "Akuko Comic Book Store",
+    "address": "2C Adedeji Adekola, Lekki, Lagos, Nigeria, 105102",
+    "primaryButtonLabel": "Visit on Instagram",
+    "primaryButtonUrl": "https://www.instagram.com/akukocomicshop?igsh=aDJlZWQyd3I3bmQ5",
+    "secondaryButtonLabel": "Contact Us",
+    "secondaryButtonUrl": "tel:+2347077156204"
+  },
+  {
+    "name": "Didi Museum",
+    "address": "175Akin, Akin Adesola St, Victoria Island, Lagos",
+    "primaryButtonLabel": "Visit on Instagram",
+    "primaryButtonUrl": "https://www.instagram.com/didimuseum?igsh=MWg0a2kxOGxlYjhueA==",
+    "secondaryButtonLabel": "Contact Us",
+    "secondaryButtonUrl": "tel:+2349015340090"
+  },
+  {
+    "name": "BookNook",
+    "address": "Block 31 Plot, Gateview Plaza, Lekki 1 Lagos NG, 11 Admiralty Wy, Eti-Osa, Lagos",
+    "primaryButtonLabel": "Visit on Instagram",
+    "primaryButtonUrl": "https://www.instagram.com/booknkltd?igsh=MWRjOTdiYjVmN296aA==",
+    "secondaryButtonLabel": "Contact Us",
+    "secondaryButtonUrl": "tel:+2349085648059"
+  }
+],
+  "digitalTitle": "Prefer Digital?",
+  "digitalBody": "Get instant access to Tales 'N' Tells and start reading right now. No waiting, no shipping—just pure storytelling.",
+  "digitalButtonLabel": "Get Digital Copy",
+  "digitalButtonUrl": "/tales"
+},
+        {
+            "type": "features",
+            "eyebrow": "Craftsmanship",
+            "title": "Built for the",
+            "titleAccent": "Hyper-Modern Reader.",
+            "note": "",
+            "items": [
+                {
+                    "type": "featureItem",
+                    "icon": "book-open",
+                    "title": "ANTHOLOGY BUNDLES",
+                    "description": "Digital editions compiled into bi-annual thematic archives."
+                },
+                {
+                    "type": "featureItem",
+                    "icon": "sparkles",
+                    "title": "KINETIC ART",
+                    "description": "Story paced art that brings panels to life as you engage."
+                },
+                {
+                    "type": "featureItem",
+                    "icon": "zap",
+                    "title": "QUICK HITS",
+                    "description": "Stories designed to be consumed in 120 seconds or less."
+                }
+            ]
+        }
+    ]
+}

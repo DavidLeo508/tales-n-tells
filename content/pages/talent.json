@@ -1,0 +1,67 @@
+{
+    "type": "page",
+    "slug": "talent",
+    "title": "Tales 'N' Tells — Talent",
+    "sections": [
+        {
+            "type": "pageHeader",
+            "eyebrow": "Join the Movement",
+            "title": "We're Hiring",
+            "subtitle": "Tales 'N' Tells is looking for obsessive creators. People who believe that constraints breed creativity and that every detail matters."
+        },
+        {
+            "type": "recruitment",
+            "rolesTitle": "Open Positions",
+            "roles": [
+                {
+                    "type": "role",
+                    "icon": "type",
+                    "label": "Writer",
+                    "description": "Craft surgical narratives that hit like a hammer."
+                },
+                {
+                    "type": "role",
+                    "icon": "pencil",
+                    "label": "Artist",
+                    "description": "Bring stories to life through high-fidelity visuals."
+                },
+                {
+                    "type": "role",
+                    "icon": "palette",
+                    "label": "Colorist",
+                    "description": "Paint our stories and give emotions to the pages"
+                },
+                {
+                    "type": "role",
+                    "icon": "message-circle",
+                    "label": "Letterer",
+                    "description": "Master the typography that makes panels sing."
+                },
+                {
+                    "type": "role",
+                    "icon": "Clapperboard",
+                    "label": "Motion Designer/Video Editor",
+                    "description": "Create Motion visual experiences that enhance narrative."
+                },
+                {
+                    "type": "role",
+                    "icon": "lightbulb",
+                    "label": "Affiliate Marketer",
+                    "description": "Shape the future of Tales 'N' Tells."
+                }
+            ],
+            "formTitle": "Submit Your Application",
+            "submitLabel": "Submit",
+            "successTitle": "Received",
+            "successBody": "We've got your submission and we'll get back to you soon. Until then...keep telling tales."
+        },
+{
+    "type": "statement",
+    "title": "Don't See Your Role?",
+    "titleAccent": "We're Always Listening.",
+    "body": "If you're passionate about storytelling and want to push boundaries with us, reach out. We're interested in exceptional people doing exceptional work.",
+    "buttonLabel": "Email Us",
+    "buttonUrl": "mailto:tellsntales@gmail.com?subject=Talent%20Application%20%E2%80%94%20Tales%20%27N%27%20Tells"
+}
+    ]
+}

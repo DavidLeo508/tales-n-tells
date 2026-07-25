@@ -1,0 +1,54 @@
+{
+    "type": "page",
+    "slug": "about",
+    "title": "Tales 'N' Tells — About",
+    "sections": [
+        {
+            "type": "pageHeader",
+            "eyebrow": "Our Story",
+            "title": "The core",
+            "subtitle": "Tales 'N' Tells is a flash fiction comic book anthology. More than a publication, it's a move against narrative bloat. Creating with belief in the power of constraint, the beauty of brevity, and the impact of stories that refuse to waste your time."
+        },
+        {
+            "type": "prose",
+            "title": "the frame",
+            "paragraphs": [
+                "Founded by Ayegbusi D. D. Tobi, Tales 'N' Tells emerged from a simple observation: the world doesn't need longer stories. It needs better ones. Stories that hit harder, stay longer, and demand less of your time.",
+                "Every comic in our anthology is a calibrated narrative, designed to resonate long after you've finished reading. We're not interested in volume. We're interested in impact.",
+                "Tales 'N' Tells isn't a one-man army. Our continuously growing community of creators are obsessed with craft. Every panel is deliberate. Every word is essential. Every visual choice serves the story. This is flash fiction elevated to an art form, where constraints breed creativity and brevity becomes a superpower."
+            ]
+        },
+        {
+            "type": "pillars",
+            "title": "the Pillars",
+            "items": [
+                {
+                    "type": "featureItem",
+                    "icon": "book-open",
+                    "title": "ROOTED DEPTH",
+                    "description": "Every story is grounded in authentic emotion and cultural specificity. We celebrate the particular to reach the universal."
+                },
+                {
+                    "type": "featureItem",
+                    "icon": "zap",
+                    "title": "SURGICAL PACE",
+                    "description": "No filler. No tangents. Every moment counts. We respect your time by making every second matter."
+                },
+                {
+                    "type": "featureItem",
+                    "icon": "palette",
+                    "title": "VIVID ARTISTRY",
+                    "description": "Visuals aren't decoration, they're narrative. Our artists are storytellers first, creating kinetic art that moves the plot forward."
+                }
+            ]
+        },
+        {
+            "type": "statement",
+            "title": "It's Not Just a Story.",
+            "titleAccent": "It's a Conversation.",
+            "body": "Join us as we redefine what comic book stories can be. Every issue is an invitation to think differently, feel deeply, and question the ordinary.",
+            "buttonLabel": "Explore the Anthology",
+            "buttonUrl": "/tales"
+        }
+    ]
+}

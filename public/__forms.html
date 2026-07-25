@@ -1,0 +1,30 @@
+<!--
+  Static form skeleton for Netlify build-time form detection.
+  Netlify scans deployed HTML for <form data-netlify> tags. Because every page
+  in this app is rendered by Next.js, these hidden forms make the build bot
+  aware of the forms so submissions are accepted at runtime.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Forms</title>
+  </head>
+  <body>
+    <form name="talent-application" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="talent-application" />
+      <input name="bot-field" />
+      <input name="firstName" />
+      <input name="lastName" />
+      <input name="email" type="email" />
+      <input name="role" />
+      <input name="portfolio" type="url" />
+    </form>
+
+    <form name="newsletter" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="newsletter" />
+      <input name="bot-field" />
+      <input name="email" type="email" />
+    </form>
+  </body>
+</html>
