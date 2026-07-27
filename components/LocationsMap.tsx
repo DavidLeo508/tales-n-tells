@@ -4,14 +4,9 @@ import { useEffect, useRef } from "react";
 
 declare global {
   interface Window {
-    google: typeof google;
+    google?: typeof google;
   }
 }
-
-const locations = [
-  {
-    name: "Akuko Comic Book Store",
-    // ...
 
 const locations = [
   {
@@ -65,7 +60,7 @@ export default function LocationsMap() {
     let cancelled = false;
 
     async function loadMap() {
-      // Prevent loading the Google Maps script more than once
+      // Load Google Maps if it hasn't already been loaded
       if (!window.google?.maps) {
         await new Promise<void>((resolve, reject) => {
           const existingScript = document.querySelector(
@@ -95,12 +90,14 @@ export default function LocationsMap() {
         });
       }
 
-      if (cancelled || !mapRef.current) return;
+      if (cancelled || !mapRef.current || !window.google?.maps) return;
 
       const { AdvancedMarkerElement } =
-        (await google.maps.importLibrary("marker")) as google.maps.MarkerLibrary;
+        (await window.google.maps.importLibrary(
+          "marker"
+        )) as google.maps.MarkerLibrary;
 
-      const map = new google.maps.Map(mapRef.current, {
+      const map = new window.google.maps.Map(mapRef.current, {
         center: {
           lat: 6.445,
           lng: 3.48,
@@ -113,7 +110,7 @@ export default function LocationsMap() {
         zoomControl: true,
       });
 
-      const bounds = new google.maps.LatLngBounds();
+      const bounds = new window.google.maps.LatLngBounds();
 
       locations.forEach((location) => {
         const marker = new AdvancedMarkerElement({
@@ -122,7 +119,7 @@ export default function LocationsMap() {
           title: location.name,
         });
 
-        const infoWindow = new google.maps.InfoWindow({
+        const infoWindow = new window.google.maps.InfoWindow({
           content: `
             <div style="padding: 8px; max-width: 220px; font-family: Arial, sans-serif;">
               <h3 style="margin: 0 0 8px; font-size: 16px; color: #111;">
@@ -165,15 +162,19 @@ export default function LocationsMap() {
         bounds.extend(location.position);
       });
 
-      // Fit the map around all three locations
+      // Fit the map to show all three locations
       map.fitBounds(bounds);
 
       // Prevent the map from zooming in too closely
-      google.maps.event.addListenerOnce(map, "bounds_changed", () => {
-        if (map.getZoom()! > 13) {
-          map.setZoom(13);
+      window.google.maps.event.addListenerOnce(
+        map,
+        "bounds_changed",
+        () => {
+          if (map.getZoom()! > 13) {
+            map.setZoom(13);
+          }
         }
-      });
+      );
     }
 
     loadMap().catch((error) => {
