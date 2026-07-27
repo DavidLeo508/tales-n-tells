@@ -15,25 +15,16 @@ export default function Footer() {
       data-sb-object-id={footer.__metadata.id}
       className="py-20 bg-ink border-t border-bone/5 px-6 md:px-10"
     >
-<div className="footer-theme-text max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-[10px] tracking-[0.3em] uppercase">
+      <div className="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-[10px] tracking-[0.3em] uppercase">
         
         {/* Logo */}
-        <div className="relative h-12 w-48">
-          {/* Dark mode logo */}
-          <img
-            src="/images/1000048852.png"
-            alt={(footer.logoAlt as string) ?? "Logo"}
-            className="absolute left-0 top-0 h-12 w-auto object-contain logo-dark"
-          />
+        <img
+          src="/images/1000048852.png"
+          alt={(footer.logoAlt as string) ?? "Logo"}
+          className="h-16 w-auto object-contain logo-theme"
+        />
 
-          {/* Light mode logo */}
-          <img
-            src="/images/1000048853.png"
-            alt={(footer.logoAlt as string) ?? "Logo"}
-            className="absolute left-0 top-0 h-12 w-auto object-contain logo-light"
-          />
-        </div>
-
+        {/* Social links */}
         <div
           className="flex flex-wrap justify-center gap-8 md:gap-12"
           data-sb-field-path="socialLinks"
@@ -50,6 +41,7 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Copyright */}
         <div
           className="font-mono opacity-60"
           data-sb-field-path="copyright"

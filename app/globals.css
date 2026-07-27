@@ -149,23 +149,11 @@
 }
 
 
-.logo-dark {
-  opacity: 1;
-  visibility: visible;
+
+.logo-theme {
+  content: url("/images/1000048852.png");
 }
 
-.logo-light {
-  opacity: 0;
-  visibility: hidden;
+html[data-theme="light"] .logo-theme {
+  content: url("/images/1000048853.png");
 }
-
-html[data-theme="light"] .logo-dark {
-  opacity: 0;
-  visibility: hidden;
-}
-
-html[data-theme="light"] .logo-light {
-  opacity: 1;
-  visibility: visible;
-}
-
