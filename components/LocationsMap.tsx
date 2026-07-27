@@ -2,13 +2,17 @@
 
 import { useEffect, useRef } from "react";
 
-declare global {
-  interface Window {
-    google?: typeof google;
-  }
+interface Location {
+  name: string;
+  address: string;
+  position: {
+    lat: number;
+    lng: number;
+  };
+  mapsUrl: string;
 }
 
-const locations = [
+const locations: Location[] = [
   {
     name: "Akuko Comic Book Store",
     address: "2C Adedeji Adekola, Lekki, Lagos, Nigeria, 105102",
@@ -60,8 +64,16 @@ export default function LocationsMap() {
     let cancelled = false;
 
     async function loadMap() {
-      // Load Google Maps if it hasn't already been loaded
-      if (!window.google?.maps) {
+      // Check if Google Maps is already loaded
+      const googleMaps = (
+        window as typeof window & {
+          google?: {
+            maps?: typeof google.maps;
+          };
+        }
+      ).google;
+
+      if (!googleMaps?.maps) {
         await new Promise<void>((resolve, reject) => {
           const existingScript = document.querySelector(
             'script[data-google-maps="true"]'
@@ -83,6 +95,7 @@ export default function LocationsMap() {
           script.dataset.googleMaps = "true";
 
           script.onload = () => resolve();
+
           script.onerror = () =>
             reject(new Error("Google Maps failed to load."));
 
@@ -90,14 +103,19 @@ export default function LocationsMap() {
         });
       }
 
-      if (cancelled || !mapRef.current || !window.google?.maps) return;
+      if (cancelled || !mapRef.current) return;
+
+      // Access Google Maps from the browser window
+      const maps = (
+        window as typeof window & {
+          google: typeof globalThis.google;
+        }
+      ).google.maps;
 
       const { AdvancedMarkerElement } =
-        (await window.google.maps.importLibrary(
-          "marker"
-        )) as google.maps.MarkerLibrary;
+        (await maps.importLibrary("marker")) as google.maps.MarkerLibrary;
 
-      const map = new window.google.maps.Map(mapRef.current, {
+      const map = new maps.Map(mapRef.current, {
         center: {
           lat: 6.445,
           lng: 3.48,
@@ -110,7 +128,7 @@ export default function LocationsMap() {
         zoomControl: true,
       });
 
-      const bounds = new window.google.maps.LatLngBounds();
+      const bounds = new maps.LatLngBounds();
 
       locations.forEach((location) => {
         const marker = new AdvancedMarkerElement({
@@ -119,14 +137,27 @@ export default function LocationsMap() {
           title: location.name,
         });
 
-        const infoWindow = new window.google.maps.InfoWindow({
+        const infoWindow = new maps.InfoWindow({
           content: `
-            <div style="padding: 8px; max-width: 220px; font-family: Arial, sans-serif;">
-              <h3 style="margin: 0 0 8px; font-size: 16px; color: #111;">
+            <div style="
+              padding: 8px;
+              max-width: 220px;
+              font-family: Arial, sans-serif;
+            ">
+              <h3 style="
+                margin: 0 0 8px;
+                font-size: 16px;
+                color: #111;
+              ">
                 ${location.name}
               </h3>
 
-              <p style="margin: 0 0 12px; font-size: 13px; line-height: 1.5; color: #555;">
+              <p style="
+                margin: 0 0 12px;
+                font-size: 13px;
+                line-height: 1.5;
+                color: #555;
+              ">
                 ${location.address}
               </p>
 
@@ -162,19 +193,15 @@ export default function LocationsMap() {
         bounds.extend(location.position);
       });
 
-      // Fit the map to show all three locations
+      // Fit the map around all three locations
       map.fitBounds(bounds);
 
       // Prevent the map from zooming in too closely
-      window.google.maps.event.addListenerOnce(
-        map,
-        "bounds_changed",
-        () => {
-          if (map.getZoom()! > 13) {
-            map.setZoom(13);
-          }
+      maps.event.addListenerOnce(map, "bounds_changed", () => {
+        if (map.getZoom()! > 13) {
+          map.setZoom(13);
         }
-      );
+      });
     }
 
     loadMap().catch((error) => {
