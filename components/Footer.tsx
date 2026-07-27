@@ -16,7 +16,6 @@ export default function Footer() {
       className="py-20 bg-ink border-t border-bone/5 px-6 md:px-10"
     >
       <div className="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-[10px] tracking-[0.3em] uppercase">
-        
         {/* Logo */}
         <img
           src="/images/1000048852.png"
