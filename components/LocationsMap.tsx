@@ -8,8 +8,10 @@ declare global {
   }
 }
 
-
-import { useEffect, useRef } from "react";
+const locations = [
+  {
+    name: "Akuko Comic Book Store",
+    // ...
 
 const locations = [
   {
