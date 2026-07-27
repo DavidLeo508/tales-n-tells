@@ -12,6 +12,10 @@ interface Location {
   mapsUrl: string;
 }
 
+interface GoogleMapsWindow extends Window {
+  google?: any;
+}
+
 const locations: Location[] = [
   {
     name: "Akuko Comic Book Store",
@@ -64,16 +68,10 @@ export default function LocationsMap() {
     let cancelled = false;
 
     async function loadMap() {
-      // Check if Google Maps is already loaded
-      const googleMaps = (
-        window as typeof window & {
-          google?: {
-            maps?: typeof google.maps;
-          };
-        }
-      ).google;
+      const win = window as GoogleMapsWindow;
 
-      if (!googleMaps?.maps) {
+      // Load Google Maps script if it hasn't already been loaded
+      if (!win.google?.maps) {
         await new Promise<void>((resolve, reject) => {
           const existingScript = document.querySelector(
             'script[data-google-maps="true"]'
@@ -105,17 +103,20 @@ export default function LocationsMap() {
 
       if (cancelled || !mapRef.current) return;
 
-      // Access Google Maps from the browser window
-      const maps = (
-        window as typeof window & {
-          google: typeof globalThis.google;
-        }
-      ).google.maps;
+      const googleMaps = (window as GoogleMapsWindow).google?.maps;
 
-      const { AdvancedMarkerElement } =
-        (await maps.importLibrary("marker")) as google.maps.MarkerLibrary;
+      if (!googleMaps) {
+        throw new Error("Google Maps API was not available.");
+      }
 
-      const map = new maps.Map(mapRef.current, {
+      // Load the Advanced Marker library
+      const markerLibrary = await googleMaps.importLibrary("marker");
+
+      const AdvancedMarkerElement =
+        markerLibrary.AdvancedMarkerElement;
+
+      // Create the map
+      const map = new googleMaps.Map(mapRef.current, {
         center: {
           lat: 6.445,
           lng: 3.48,
@@ -128,8 +129,9 @@ export default function LocationsMap() {
         zoomControl: true,
       });
 
-      const bounds = new maps.LatLngBounds();
+      const bounds = new googleMaps.LatLngBounds();
 
+      // Add all three locations
       locations.forEach((location) => {
         const marker = new AdvancedMarkerElement({
           map,
@@ -137,7 +139,7 @@ export default function LocationsMap() {
           title: location.name,
         });
 
-        const infoWindow = new maps.InfoWindow({
+        const infoWindow = new googleMaps.InfoWindow({
           content: `
             <div style="
               padding: 8px;
@@ -197,11 +199,17 @@ export default function LocationsMap() {
       map.fitBounds(bounds);
 
       // Prevent the map from zooming in too closely
-      maps.event.addListenerOnce(map, "bounds_changed", () => {
-        if (map.getZoom()! > 13) {
-          map.setZoom(13);
+      googleMaps.event.addListenerOnce(
+        map,
+        "bounds_changed",
+        () => {
+          const currentZoom = map.getZoom();
+
+          if (currentZoom !== undefined && currentZoom > 13) {
+            map.setZoom(13);
+          }
         }
-      });
+      );
     }
 
     loadMap().catch((error) => {
