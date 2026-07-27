@@ -2,6 +2,15 @@
 
 import { useEffect, useRef } from "react";
 
+declare global {
+  interface Window {
+    google: typeof google;
+  }
+}
+
+
+import { useEffect, useRef } from "react";
+
 const locations = [
   {
     name: "Akuko Comic Book Store",
