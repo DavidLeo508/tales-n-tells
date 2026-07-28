@@ -229,35 +229,37 @@ export default function LocationsMap() {
             }
           }
         );
-      } catch (error) {
-        console.error("Google Maps error:", error);
+} catch (error) {
+  console.error("Google Maps error:", error);
 
-        if (mapRef.current) {
-          mapRef.current.innerHTML = `
-            <div style="
-              width: 100%;
-              height: 100%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              padding: 30px;
-              background: #f5f5f5;
-              color: #111;
-              text-align: center;
-              font-family: Arial, sans-serif;
-            ">
-              <div>
-                <strong>Unable to load the map.</strong>
-                <br />
-                <span style="font-size: 13px;">
-                  Please try again later.
-                </span>
-              </div>
-            </div>
-          `;
-        }
-      }
-    }
+  const message =
+    error instanceof Error ? error.message : String(error);
+
+  if (mapRef.current) {
+    mapRef.current.innerHTML = `
+      <div style="
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+        background: #f5f5f5;
+        color: #111;
+        text-align: center;
+        font-family: Arial, sans-serif;
+      ">
+        <div>
+          <strong>Google Maps Error</strong>
+          <br /><br />
+          <span style="font-size: 13px;">
+            ${message}
+          </span>
+        </div>
+      </div>
+    `;
+  }
+}
 
     initializeMap();
 
