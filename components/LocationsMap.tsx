@@ -36,15 +36,12 @@ export default function LocationsMap() {
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-    map.current = new maplibregl.Map({
-      container: mapContainer.current,
-
-      // Light, clean map style
+map.current = new maplibregl.Map({
+  container: mapContainer.current,
 style: `https://api.maptiler.com/maps/streets-v2-light/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`,
-
-      center: [3.48, 6.445],
-      zoom: 11.5,
-    });
+  center: [3.48, 6.445],
+  zoom: 11.5,
+});
 
     map.current.on("error", (e) => {
   console.error("MapLibre error:", e);
