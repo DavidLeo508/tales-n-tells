@@ -50,12 +50,9 @@ export default function LocationsMap() {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
-    if (!apiKey) {
-      console.error("Google Maps API key is missing.");
-      return;
-    }
+console.log("Google Maps API key exists:", !!apiKey);
 
     if (!mapRef.current) return;
 
