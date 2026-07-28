@@ -122,20 +122,26 @@ export default function RecruitmentForm({
       <div>
         <label className={LABEL}>Role</label>
 
-        <select
-          name="role"
-          required
-          className={FIELD}
-          defaultValue=""
-        >
-          <option value="">Select a role...</option>
+<select
+  name="role"
+  required
+  defaultValue=""
+  className={`${FIELD} bg-black text-bone`}
+>
+  <option value="" className="bg-black text-bone">
+    Select a role...
+  </option>
 
-          {roles.map((role, i) => (
-            <option key={i} value={role.label}>
-              {role.label}
-            </option>
-          ))}
-        </select>
+  {roles.map((role, i) => (
+    <option
+      key={i}
+      value={role.label}
+      className="bg-black text-bone"
+    >
+      {role.label}
+    </option>
+  ))}
+</select>
       </div>
 
       <div>
