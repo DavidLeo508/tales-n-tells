@@ -50,59 +50,38 @@ export default function LocationsMap() {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-
-console.log("Google Maps API key exists:", !!apiKey);
-
     if (!mapRef.current) return;
+
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+    console.log("Google Maps API key exists:", Boolean(apiKey));
+
+    if (!apiKey) {
+      console.error("Google Maps API key is missing.");
+      return;
+    }
 
     let cancelled = false;
 
     const loadGoogleMaps = (): Promise<void> => {
       return new Promise((resolve, reject) => {
-        // Google Maps is already available
         if (window.google?.maps) {
           resolve();
           return;
         }
 
-        // Check if another script is already loading
         const existingScript = document.querySelector(
           'script[data-google-maps="true"]'
         ) as HTMLScriptElement | null;
 
         if (existingScript) {
-          const checkGoogleMaps = () => {
-            if (window.google?.maps) {
-              resolve();
-            }
-          };
-
-          existingScript.addEventListener("load", checkGoogleMaps);
+          existingScript.addEventListener("load", () => resolve());
           existingScript.addEventListener("error", () => {
-            reject(new Error("Google Maps script failed to load."));
+            reject(new Error("Google Maps failed to load."));
           });
-
-          // In case the script loaded before our listener was attached
-          const interval = window.setInterval(() => {
-            if (window.google?.maps) {
-              window.clearInterval(interval);
-              resolve();
-            }
-          }, 100);
-
-          window.setTimeout(() => {
-            window.clearInterval(interval);
-
-            if (!window.google?.maps) {
-              reject(new Error("Google Maps API timed out."));
-            }
-          }, 10000);
-
           return;
         }
 
-        // Create Google Maps script
         const script = document.createElement("script");
 
         script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
@@ -114,9 +93,7 @@ console.log("Google Maps API key exists:", !!apiKey);
           if (window.google?.maps) {
             resolve();
           } else {
-            reject(
-              new Error("Google Maps loaded but the API is unavailable.")
-            );
+            reject(new Error("Google Maps API is unavailable."));
           }
         };
 
@@ -128,7 +105,7 @@ console.log("Google Maps API key exists:", !!apiKey);
       });
     };
 
-    async function initializeMap() {
+    const initializeMap = async () => {
       try {
         await loadGoogleMaps();
 
@@ -159,25 +136,12 @@ console.log("Google Maps API key exists:", !!apiKey);
 
           const infoWindow = new window.google.maps.InfoWindow({
             content: `
-              <div style="
-                padding: 8px;
-                max-width: 220px;
-                font-family: Arial, sans-serif;
-              ">
-                <h3 style="
-                  margin: 0 0 8px;
-                  font-size: 16px;
-                  color: #111;
-                ">
+              <div style="padding: 8px; max-width: 220px; font-family: Arial, sans-serif;">
+                <h3 style="margin: 0 0 8px; font-size: 16px; color: #111;">
                   ${location.name}
                 </h3>
 
-                <p style="
-                  margin: 0 0 12px;
-                  font-size: 13px;
-                  line-height: 1.5;
-                  color: #555;
-                ">
+                <p style="margin: 0 0 12px; font-size: 13px; line-height: 1.5; color: #555;">
                   ${location.address}
                 </p>
 
@@ -226,37 +190,10 @@ console.log("Google Maps API key exists:", !!apiKey);
             }
           }
         );
-} catch (error) {
-  console.error("Google Maps error:", error);
-
-  const message =
-    error instanceof Error ? error.message : String(error);
-
-  if (mapRef.current) {
-    mapRef.current.innerHTML = `
-      <div style="
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 30px;
-        background: #f5f5f5;
-        color: #111;
-        text-align: center;
-        font-family: Arial, sans-serif;
-      ">
-        <div>
-          <strong>Google Maps Error</strong>
-          <br /><br />
-          <span style="font-size: 13px;">
-            ${message}
-          </span>
-        </div>
-      </div>
-    `;
-  }
-}
+      } catch (error) {
+        console.error("Google Maps error:", error);
+      }
+    };
 
     initializeMap();
 
