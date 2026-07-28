@@ -1,21 +1,21 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import * as maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 const locations = [
   {
     name: "Akuko Comic Book Store",
     address: "2C Adedeji Adekola, Lekki, Lagos, Nigeria, 105102",
-    coordinates: [3.5852, 6.4698] as [number, number],
+    coordinates: [6.4698, 3.5852] as [number, number],
     mapsUrl:
       "https://www.google.com/maps/search/?api=1&query=2C+Adedeji+Adekola,+Lekki,+Lagos,+Nigeria",
   },
   {
     name: "Didi Museum",
     address: "175 Akin Adesola Street, Victoria Island, Lagos",
-    coordinates: [3.4219, 6.4281] as [number, number],
+    coordinates: [6.4281, 3.4219] as [number, number],
     mapsUrl:
       "https://www.google.com/maps/search/?api=1&query=175+Akin+Adesola+Street,+Victoria+Island,+Lagos",
   },
@@ -23,7 +23,7 @@ const locations = [
     name: "BookNook",
     address:
       "Block 31 Plot, Gateview Plaza, Lekki 1, 11 Admiralty Way, Eti-Osa, Lagos",
-    coordinates: [3.4696, 6.4398] as [number, number],
+    coordinates: [6.4398, 3.4696] as [number, number],
     mapsUrl:
       "https://www.google.com/maps/search/?api=1&query=Gateview+Plaza,+11+Admiralty+Way,+Lekki,+Lagos",
   },
@@ -31,36 +31,64 @@ const locations = [
 
 export default function LocationsMap() {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<maplibregl.Map | null>(null);
+  const map = useRef<L.Map | null>(null);
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
 
-map.current = new maplibregl.Map({
-  container: mapContainer.current,
-style: `https://api.maptiler.com/maps/streets-v2-light/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`,
-  center: [3.48, 6.445],
-  zoom: 11.5,
+    // Fix Leaflet's default marker icons in Next.js
+const markerIcon = L.divIcon({
+  className: "custom-map-marker",
+  html: `
+    <div style="
+      width: 28px;
+      height: 28px;
+      background: #c8103e;
+      border: 3px solid white;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      position: relative;
+    ">
+      <div style="
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 7px;
+        left: 7px;
+      "></div>
+    </div>
+  `,
+  iconSize: [28, 28],
+  iconAnchor: [14, 28],
+  popupAnchor: [0, -28],
 });
+    // Create map
+    map.current = L.map(mapContainer.current, {
+      center: [6.445, 3.48],
+      zoom: 11.5,
+      zoomControl: true,
+    });
 
-    map.current.on("error", (e) => {
-  console.error("MapLibre error:", e);
-});
+    // Clean white/light map
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      {
+        attribution:
+          '&copy; OpenStreetMap contributors &copy; CARTO',
+        maxZoom: 20,
+      }
+    ).addTo(map.current);
 
-
-    map.current.addControl(
-      new maplibregl.NavigationControl(),
-      "top-right"
-    );
-
+    // Add markers
     locations.forEach((location) => {
-      const popup = new maplibregl.Popup({
-        offset: 25,
-        maxWidth: "280px",
-      }).setHTML(`
+      const popupContent = `
         <div style="
           padding: 6px;
           font-family: Arial, sans-serif;
+          min-width: 220px;
         ">
           <h3 style="
             margin: 0 0 8px;
@@ -99,13 +127,19 @@ style: `https://api.maptiler.com/maps/streets-v2-light/style.json?key=${process.
             Open in Google Maps
           </a>
         </div>
-      `);
+      `;
 
-      new maplibregl.Marker({ color: "#c8103e" })
-        .setLngLat(location.coordinates)
-        .setPopup(popup)
-        .addTo(map.current!);
+      L.marker(location.coordinates, {
+        icon: markerIcon,
+      })
+        .addTo(map.current!)
+        .bindPopup(popupContent);
     });
+
+    // Fix sizing after the map renders
+    setTimeout(() => {
+      map.current?.invalidateSize();
+    }, 100);
 
     return () => {
       map.current?.remove();
