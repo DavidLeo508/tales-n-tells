@@ -12,10 +12,6 @@ interface Location {
   mapsUrl: string;
 }
 
-interface GoogleMapsWindow extends Window {
-  google?: any;
-}
-
 const locations: Location[] = [
   {
     name: "Akuko Comic Book Store",
@@ -54,167 +50,216 @@ export default function LocationsMap() {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!mapRef.current) return;
-
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
     if (!apiKey) {
-      console.error(
-        "Google Maps API key is missing. Check your .env.local file."
-      );
+      console.error("Google Maps API key is missing.");
       return;
     }
 
+    if (!mapRef.current) return;
+
     let cancelled = false;
 
-    async function loadMap() {
-      const win = window as GoogleMapsWindow;
+    const loadGoogleMaps = (): Promise<void> => {
+      return new Promise((resolve, reject) => {
+        // Google Maps is already available
+        if (window.google?.maps) {
+          resolve();
+          return;
+        }
 
-      // Load Google Maps script if it hasn't already been loaded
-      if (!win.google?.maps) {
-        await new Promise<void>((resolve, reject) => {
-          const existingScript = document.querySelector(
-            'script[data-google-maps="true"]'
-          );
+        // Check if another script is already loading
+        const existingScript = document.querySelector(
+          'script[data-google-maps="true"]'
+        ) as HTMLScriptElement | null;
 
-          if (existingScript) {
-            existingScript.addEventListener("load", () => resolve());
-            existingScript.addEventListener("error", () =>
-              reject(new Error("Google Maps failed to load."))
+        if (existingScript) {
+          const checkGoogleMaps = () => {
+            if (window.google?.maps) {
+              resolve();
+            }
+          };
+
+          existingScript.addEventListener("load", checkGoogleMaps);
+          existingScript.addEventListener("error", () => {
+            reject(new Error("Google Maps script failed to load."));
+          });
+
+          // In case the script loaded before our listener was attached
+          const interval = window.setInterval(() => {
+            if (window.google?.maps) {
+              window.clearInterval(interval);
+              resolve();
+            }
+          }, 100);
+
+          window.setTimeout(() => {
+            window.clearInterval(interval);
+
+            if (!window.google?.maps) {
+              reject(new Error("Google Maps API timed out."));
+            }
+          }, 10000);
+
+          return;
+        }
+
+        // Create Google Maps script
+        const script = document.createElement("script");
+
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
+        script.async = true;
+        script.defer = true;
+        script.dataset.googleMaps = "true";
+
+        script.onload = () => {
+          if (window.google?.maps) {
+            resolve();
+          } else {
+            reject(
+              new Error("Google Maps loaded but the API is unavailable.")
             );
-            return;
           }
+        };
 
-          const script = document.createElement("script");
+        script.onerror = () => {
+          reject(new Error("Google Maps script failed to load."));
+        };
 
-          script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=weekly`;
-          script.async = true;
-          script.defer = true;
-          script.dataset.googleMaps = "true";
-
-          script.onload = () => resolve();
-
-          script.onerror = () =>
-            reject(new Error("Google Maps failed to load."));
-
-          document.head.appendChild(script);
-        });
-      }
-
-      if (cancelled || !mapRef.current) return;
-
-      const googleMaps = (window as GoogleMapsWindow).google?.maps;
-
-      if (!googleMaps) {
-        throw new Error("Google Maps API was not available.");
-      }
-
-      // Load the Advanced Marker library
-      const markerLibrary = await googleMaps.importLibrary("marker");
-
-      const AdvancedMarkerElement =
-        markerLibrary.AdvancedMarkerElement;
-
-      // Create the map
-      const map = new googleMaps.Map(mapRef.current, {
-        center: {
-          lat: 6.445,
-          lng: 3.48,
-        },
-        zoom: 12,
-        mapId: "DEMO_MAP_ID",
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: true,
-        zoomControl: true,
+        document.head.appendChild(script);
       });
+    };
 
-      const bounds = new googleMaps.LatLngBounds();
+    async function initializeMap() {
+      try {
+        await loadGoogleMaps();
 
-      // Add all three locations
-      locations.forEach((location) => {
-        const marker = new AdvancedMarkerElement({
-          map,
-          position: location.position,
-          title: location.name,
+        if (cancelled || !mapRef.current || !window.google?.maps) {
+          return;
+        }
+
+        const map = new window.google.maps.Map(mapRef.current, {
+          center: {
+            lat: 6.445,
+            lng: 3.48,
+          },
+          zoom: 12,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true,
+          zoomControl: true,
         });
 
-        const infoWindow = new googleMaps.InfoWindow({
-          content: `
+        const bounds = new window.google.maps.LatLngBounds();
+
+        locations.forEach((location) => {
+          const marker = new window.google.maps.Marker({
+            map,
+            position: location.position,
+            title: location.name,
+          });
+
+          const infoWindow = new window.google.maps.InfoWindow({
+            content: `
+              <div style="
+                padding: 8px;
+                max-width: 220px;
+                font-family: Arial, sans-serif;
+              ">
+                <h3 style="
+                  margin: 0 0 8px;
+                  font-size: 16px;
+                  color: #111;
+                ">
+                  ${location.name}
+                </h3>
+
+                <p style="
+                  margin: 0 0 12px;
+                  font-size: 13px;
+                  line-height: 1.5;
+                  color: #555;
+                ">
+                  ${location.address}
+                </p>
+
+                <a
+                  href="${location.mapsUrl}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="
+                    display: inline-block;
+                    padding: 8px 12px;
+                    background: #c8103e;
+                    color: white;
+                    text-decoration: none;
+                    font-size: 11px;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                  "
+                >
+                  Open in Google Maps
+                </a>
+              </div>
+            `,
+          });
+
+          marker.addListener("click", () => {
+            infoWindow.open({
+              map,
+              anchor: marker,
+            });
+          });
+
+          bounds.extend(location.position);
+        });
+
+        map.fitBounds(bounds);
+
+        window.google.maps.event.addListenerOnce(
+          map,
+          "bounds_changed",
+          () => {
+            const zoom = map.getZoom();
+
+            if (zoom !== undefined && zoom > 13) {
+              map.setZoom(13);
+            }
+          }
+        );
+      } catch (error) {
+        console.error("Google Maps error:", error);
+
+        if (mapRef.current) {
+          mapRef.current.innerHTML = `
             <div style="
-              padding: 8px;
-              max-width: 220px;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 30px;
+              background: #f5f5f5;
+              color: #111;
+              text-align: center;
               font-family: Arial, sans-serif;
             ">
-              <h3 style="
-                margin: 0 0 8px;
-                font-size: 16px;
-                color: #111;
-              ">
-                ${location.name}
-              </h3>
-
-              <p style="
-                margin: 0 0 12px;
-                font-size: 13px;
-                line-height: 1.5;
-                color: #555;
-              ">
-                ${location.address}
-              </p>
-
-              <a
-                href="${location.mapsUrl}"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="
-                  display: inline-block;
-                  padding: 8px 12px;
-                  background: #c8103e;
-                  color: white;
-                  text-decoration: none;
-                  font-size: 11px;
-                  font-weight: bold;
-                  letter-spacing: 1px;
-                  text-transform: uppercase;
-                "
-              >
-                Open in Google Maps
-              </a>
+              <div>
+                <strong>Unable to load the map.</strong>
+                <br />
+                <span style="font-size: 13px;">
+                  Please try again later.
+                </span>
+              </div>
             </div>
-          `,
-        });
-
-        marker.addListener("click", () => {
-          infoWindow.open({
-            map,
-            anchor: marker,
-          });
-        });
-
-        bounds.extend(location.position);
-      });
-
-      // Fit the map around all three locations
-      map.fitBounds(bounds);
-
-      // Prevent the map from zooming in too closely
-      googleMaps.event.addListenerOnce(
-        map,
-        "bounds_changed",
-        () => {
-          const currentZoom = map.getZoom();
-
-          if (currentZoom !== undefined && currentZoom > 13) {
-            map.setZoom(13);
-          }
+          `;
         }
-      );
+      }
     }
 
-    loadMap().catch((error) => {
-      console.error("Google Maps error:", error);
-    });
+    initializeMap();
 
     return () => {
       cancelled = true;
